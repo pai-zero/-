@@ -1,6 +1,7 @@
 #include <iostream>
-#include <fstream>
-#include <sstream>
+#include <fstream>// åŒ…å«ifstreamã€ofstreamä¸¤ç±»ï¼ŒåŒ…å«è¾“å…¥è¾“å‡ºæ–‡ä»¶
+#include <sstream>// istringstreamè¾“å…¥ã€ostringstreamè¾“å‡º å’Œ stringstreamè¾“å…¥è¾“å‡º
+
 
 using namespace std;
 
@@ -16,103 +17,104 @@ struct Employee {
     string notes;
 };
 
-void displayMenu();// ²Ëµ¥Ä£¿é
-void addEmployee(Employee employees[], int& count);// Ìí¼ÓÄ£¿é
-void updateEmployee(Employee employees[], int count);// ĞŞ¸ÄÄ£¿é
-void deleteEmployee(Employee employees[], int& count);// É¾³ıÄ£¿é
-void searchEmployeeById(const Employee employees[], int count);// ²éÑ¯Ä£¿é£¬¹¤ºÅ²éÑ¯
-void searchEmployeeByName(const Employee employees[], int count);// ²éÑ¯Ä£¿é£¬ĞÕÃû²éÑ¯
-void saveToFile(const Employee employees[], int count);// ±£´æÄ£¿é
-void readFromFile(Employee employees[], int& count);// ¶ÁÈ¡Ä£¿é
-// constĞŞÊÎÖ¸Õë±äÁ¿
+void displayMenu();// èœå•æ¨¡å—
+void addEmployee(Employee employees[], int& count);// æ·»åŠ æ¨¡å—
+void updateEmployee(Employee employees[], int count);// ä¿®æ”¹æ¨¡å—
+void deleteEmployee(Employee employees[], int& count);// åˆ é™¤æ¨¡å—
+void searchEmployeeById(const Employee employees[], int count);// æŸ¥è¯¢æ¨¡å—ï¼Œå·¥å·æŸ¥è¯¢
+void searchEmployeeByName(const Employee employees[], int count);// æŸ¥è¯¢æ¨¡å—ï¼Œå§“åæŸ¥è¯¢
+void saveToFile(const Employee employees[], int count);// ä¿å­˜æ¨¡å—
+void readFromFile(Employee employees[], int& count);// è¯»å–æ¨¡å—
+// constä¿®é¥°æŒ‡é’ˆå˜é‡,é˜²æ­¢å…¶æ„å¤–ä¿®æ”¹ï¼Œä¾‹å¦‚ const int i=5;ä¹‹åiæ— æ³•è¢«èµ‹äºˆæ–°å€¼
 
 void displayMenu() {
-    // ²Ëµ¥Ä£¿é
-    cout << "\nÔ±¹¤¹ÜÀíÏµÍ³²Ëµ¥£º" << endl;
-    cout << "1. Ìí¼ÓÔ±¹¤" << endl;
-    cout << "2. ¸üĞÂÔ±¹¤" << endl;
-    cout << "3. É¾³ıÔ±¹¤" << endl;
-    cout << "4. °´¹¤ºÅ²éÑ¯Ô±¹¤" << endl;
-    cout << "5. °´ĞÕÃû²éÑ¯Ô±¹¤" << endl;
-    cout << "6. ±£´æÎÄ¼ş" << endl;
-    cout << "7. ¶ÁÈ¡ÎÄ¼ş" << endl;
-    cout << "8. ÍË³ö" << endl;
+    // èœå•æ¨¡å—
+    cout << "\nå‘˜å·¥ç®¡ç†ç³»ç»Ÿèœå•ï¼š" << endl;
+    cout << "1. æ·»åŠ å‘˜å·¥" << endl;
+    cout << "2. æ›´æ–°å‘˜å·¥" << endl;
+    cout << "3. åˆ é™¤å‘˜å·¥" << endl;
+    cout << "4. æŒ‰å·¥å·æŸ¥è¯¢å‘˜å·¥" << endl;
+    cout << "5. æŒ‰å§“åæŸ¥è¯¢å‘˜å·¥" << endl;
+    cout << "6. ä¿å­˜æ–‡ä»¶" << endl;
+    cout << "7. è¯»å–æ–‡ä»¶" << endl;
+    cout << "8. é€€å‡º" << endl;
 }
 
 void addEmployee(Employee employees[], int& count) {
-    // Ìí¼ÓÄ£¿é
+    // æ·»åŠ æ¨¡å—
     Employee emp;
-    cout << "\nÇëÊäÈëĞèÌí¼ÓÔ±¹¤µÄĞÅÏ¢:" << endl;
-    cout << "¹¤ºÅ: ";
+    cout << "\nè¯·è¾“å…¥éœ€æ·»åŠ å‘˜å·¥çš„ä¿¡æ¯:" << endl;
+    cout << "å·¥å·: ";
     cin >> emp.id;
-    cin.ignore();// ´Ó»º³åÇøÖĞÇå³ı»»ĞĞ·û
+    cin.ignore();// ä»ç¼“å†²åŒºä¸­æ¸…é™¤æ¢è¡Œç¬¦
 
-    // ¼ì²éÔ±¹¤ÊÇ·ñÒÑ´æÔÚ
+    // æ£€æŸ¥å‘˜å·¥æ˜¯å¦å·²å­˜åœ¨
     for (int i = 0; i < count; ++i) {
         if (employees[i].id == emp.id) {
-            cout << "´Ë¹¤ºÅ " << emp.id << " ÒÑ´æÔÚ¡£ÇëÖØĞÂÑ¡Ôñ" << endl;
+            cout << "æ­¤å·¥å· " << emp.id << " å·²å­˜åœ¨ã€‚è¯·é‡æ–°é€‰æ‹©" << endl;
             return;
         }
     }
 
-    cout << "ĞÕÃû: ";
-    getline(cin, emp.name);
-    cout << "ĞÔ±ğ: ";
+     // getline()åŒ…å«äº<iostream>ä¸­
+    cout << "å§“å: ";
+    getline(cin, emp.name);// cin >> emp.name;
+    cout << "æ€§åˆ«: ";
     getline(cin, emp.gender);
-    cout << "Ñ§Àú: ";
+    cout << "å­¦å†: ";
     getline(cin, emp.education);
-    cout << "Ö°Î»: ";
+    cout << "èŒä½: ";
     getline(cin, emp.position);
-    cout << "Éí·İÖ¤ºÅ: ";
+    cout << "èº«ä»½è¯å·: ";
     getline(cin, emp.idNumber);
-    cout << "µç»°ºÅ: ";
+    cout << "ç”µè¯å·: ";
     getline(cin, emp.phoneNumber);
-    cout << "±¸×¢ĞÅÏ¢: ";
+    cout << "å¤‡æ³¨ä¿¡æ¯: ";
     getline(cin, emp.notes);
 
     employees[count++] = emp;
-    cout << "Ô±¹¤ĞÅÏ¢Ìí¼Ó³É¹¦£¡" << endl;
+    cout << "å‘˜å·¥ä¿¡æ¯æ·»åŠ æˆåŠŸï¼" << endl;
 }
 
 void updateEmployee(Employee employees[], int count) {
-    // ĞŞ¸ÄÄ£¿é
-    int empId;
-    cout << "\nÊäÈëÒª¸üĞÂµÄÔ±¹¤µÄ¹¤ºÅ: ";
+    // ä¿®æ”¹æ¨¡å—
+    int empId;// æ¬²ä¿®æ”¹å‘˜å·¥å·¥å·
+    cout << "\nè¾“å…¥è¦æ›´æ–°çš„å‘˜å·¥çš„å·¥å·: ";
     cin >> empId;
-    cin.ignore();// ´Ó»º³åÇøÖĞÇå³ı»»ĞĞ·û Ä¬ÈÏ(64,'/n')
+    cin.ignore();// ä»ç¼“å†²åŒºä¸­æ¸…é™¤æ¢è¡Œç¬¦ 
 
     for (int i = 0; i < count; ++i) {
         if (employees[i].id == empId) {
-            cout << "ÊäÈë´ËÔ±¹¤µÄ¸üĞÂÏêÏ¸ĞÅÏ¢ " << empId << ":" << endl;
-            cout << "ĞÕÃû: ";
+            cout << "è¾“å…¥æ­¤å‘˜å·¥çš„æ›´æ–°è¯¦ç»†ä¿¡æ¯ " << empId << ":" << endl;
+            cout << "å§“å: ";
             getline(cin, employees[i].name);
-            cout << "ĞÔ±ğ: ";
+            cout << "æ€§åˆ«: ";
             getline(cin, employees[i].gender);
-            cout << "Ñ§Àú: ";
+            cout << "å­¦å†: ";
             getline(cin, employees[i].education);
-            cout << "Ö°Î»: ";
+            cout << "èŒä½: ";
             getline(cin, employees[i].position);
-            cout << "Éí·İÖ¤ºÅ: ";
+            cout << "èº«ä»½è¯å·: ";
             getline(cin, employees[i].idNumber);
-            cout << "µç»°ºÅ: ";
+            cout << "ç”µè¯å·: ";
             getline(cin, employees[i].phoneNumber);
-            cout << "±¸×¢ĞÅÏ¢: ";
+            cout << "å¤‡æ³¨ä¿¡æ¯: ";
             getline(cin, employees[i].notes);
 
-            cout << "Ô±¹¤ĞÅÏ¢¸üĞÂ³É¹¦£¡" << endl;
+            cout << "å‘˜å·¥ä¿¡æ¯æ›´æ–°æˆåŠŸï¼" << endl;
             return;
         }
     }
 
-    cout << "Ô±¹¤" << empId << " ĞÅÏ¢²»ÔÚĞÅÏ¢¿âÖĞ¡£" << endl;
+    cout << "å‘˜å·¥" << empId << " ä¿¡æ¯ä¸åœ¨ä¿¡æ¯åº“ä¸­ã€‚" << endl;
 }
 
 void deleteEmployee(Employee employees[], int& count) {
-    // É¾³ıÄ£¿é
-    int empId;
-    cout << "\nÊäÈëÒªÉ¾³ıµÄÔ±¹¤µÄ¹¤ºÅ: ";
+    // åˆ é™¤æ¨¡å—
+    int empId;// æ¬²åˆ é™¤å‘˜å·¥å·¥å·
+    cout << "\nè¾“å…¥è¦åˆ é™¤çš„å‘˜å·¥çš„å·¥å·: ";
     cin >> empId;
-    cin.ignore(); // ´Ó»º³åÇøÖĞÇå³ı»»ĞĞ·û
+    cin.ignore(); // ä»ç¼“å†²åŒºä¸­æ¸…é™¤æ¢è¡Œç¬¦
 
     for (int i = 0; i < count; ++i) {
         if (employees[i].id == empId) {
@@ -121,67 +123,67 @@ void deleteEmployee(Employee employees[], int& count) {
             }
 
             --count;
-            cout << "Ô±¹¤ " << empId << " É¾³ı³É¹¦£¡" << endl;
+            cout << "å‘˜å·¥ " << empId << " åˆ é™¤æˆåŠŸï¼" << endl;
             return;
         }
     }
 
-    cout << "Ô±¹¤ " << empId << " ĞÅÏ¢²»ÔÚĞÅÏ¢¿âÖĞ¡£" << endl;
+    cout << "å‘˜å·¥ " << empId << " ä¿¡æ¯ä¸åœ¨ä¿¡æ¯åº“ä¸­ã€‚" << endl;
 }
 
 void searchEmployeeById(const Employee employees[], int count) {
-    // ²éÑ¯Ä£¿é£¬¹¤ºÅ²éÑ¯
-    int empId;
-    cout << "\nÊäÈëÒª²éÕÒµÄÔ±¹¤¹¤ºÅ: ";
+    // æŸ¥è¯¢æ¨¡å—ï¼Œå·¥å·æŸ¥è¯¢
+    int empId;// æ¬²æŸ¥è¯¢å‘˜å·¥å·¥å·
+    cout << "\nè¾“å…¥è¦æŸ¥æ‰¾çš„å‘˜å·¥å·¥å·: ";
     cin >> empId;
 
     for (int i = 0; i < count; ++i) {
         if (employees[i].id == empId) {
-            cout << "\nÔ±¹¤ĞÅÏ¢:" << endl;
-            cout << "¹¤ºÅ: " << employees[i].id << endl;
-            cout << "ĞÕÃû: " << employees[i].name << endl;
-            cout << "ĞÔ±ğ: " << employees[i].gender << endl;
-            cout << "Ñ§Àú: " << employees[i].education << endl;
-            cout << "Ö°Î»: " << employees[i].position << endl;
-            cout << "Éí·İÖ¤ºÅ: " << employees[i].idNumber << endl;
-            cout << "µç»°ºÅ: " << employees[i].phoneNumber << endl;
-            cout << "±¸×¢ĞÅÏ¢: " << employees[i].notes << endl;
+            cout << "\nå‘˜å·¥ä¿¡æ¯:" << endl;
+            cout << "å·¥å·: " << employees[i].id << endl;
+            cout << "å§“å: " << employees[i].name << endl;
+            cout << "æ€§åˆ«: " << employees[i].gender << endl;
+            cout << "å­¦å†: " << employees[i].education << endl;
+            cout << "èŒä½: " << employees[i].position << endl;
+            cout << "èº«ä»½è¯å·: " << employees[i].idNumber << endl;
+            cout << "ç”µè¯å·: " << employees[i].phoneNumber << endl;
+            cout << "å¤‡æ³¨ä¿¡æ¯: " << employees[i].notes << endl;
             return;
         }
     }
 
-    cout << "Ô±¹¤ " << empId << " ĞÅÏ¢²»ÔÚĞÅÏ¢¿âÖĞ¡£" << endl;
+    cout << "å‘˜å·¥ " << empId << " ä¿¡æ¯ä¸åœ¨ä¿¡æ¯åº“ä¸­ã€‚" << endl;
 }
 
 void searchEmployeeByName(const Employee employees[], int count) {
-    // ²éÑ¯Ä£¿é£¬ĞÕÃû²éÑ¯
-    string empName;
-    cout << "\nÊäÈëÒª²éÕÒµÄÔ±¹¤ĞÕÃû: ";
+    // æŸ¥è¯¢æ¨¡å—ï¼Œå§“åæŸ¥è¯¢
+    string empName;// æ¬²æŸ¥è¯¢å‘˜å·¥å§“å
+    cout << "\nè¾“å…¥è¦æŸ¥æ‰¾çš„å‘˜å·¥å§“å: ";
     getline(cin, empName);
 
     for (int i = 0; i < count; ++i) {
         if (employees[i].name == empName) {
-            cout << "\nÔ±¹¤ĞÅÏ¢:" << endl;
-            cout << "¹¤ºÅ: " << employees[i].id << endl;
-            cout << "ĞÕÃû: " << employees[i].name << endl;
-            cout << "ĞÔ±ğ: " << employees[i].gender << endl;
-            cout << "Ñ§Àú: " << employees[i].education << endl;
-            cout << "Ö°Î»: " << employees[i].position << endl;
-            cout << "Éí·İÖ¤ºÅ: " << employees[i].idNumber << endl;
-            cout << "µç»°ºÅ: " << employees[i].phoneNumber << endl;
-            cout << "±¸×¢ĞÅÏ¢: " << employees[i].notes << endl;
+            cout << "\nå‘˜å·¥ä¿¡æ¯:" << endl;
+            cout << "å·¥å·: " << employees[i].id << endl;
+            cout << "å§“å: " << employees[i].name << endl;
+            cout << "æ€§åˆ«: " << employees[i].gender << endl;
+            cout << "å­¦å†: " << employees[i].education << endl;
+            cout << "èŒä½: " << employees[i].position << endl;
+            cout << "èº«ä»½è¯å·: " << employees[i].idNumber << endl;
+            cout << "ç”µè¯å·: " << employees[i].phoneNumber << endl;
+            cout << "å¤‡æ³¨ä¿¡æ¯: " << employees[i].notes << endl;
             return;
         }
     }
 
-    cout << "Ô±¹¤ " << empName << " ĞÅÏ¢²»ÔÚĞÅÏ¢¿âÖĞ" << endl;
+    cout << "å‘˜å·¥ " << empName << " ä¿¡æ¯ä¸åœ¨ä¿¡æ¯åº“ä¸­" << endl;
 }
 
 void saveToFile(const Employee employees[], int count) {
-    // ±£´æÄ£¿é
-    ofstream outfile("employee_data.csv");
+    // ä¿å­˜æ¨¡å—
+    ofstream outfile("employee_data.csv");//  å†™å…¥æ–‡ä»¶ï¼Œä½¿ç”¨<<
     if (!outfile.is_open()) {
-        cout << "´ò¿ªÎÄ¼ş½øĞĞĞ´ÈëÊ±³ö´í¡£" << endl;
+        cout << "æ‰“å¼€æ–‡ä»¶è¿›è¡Œå†™å…¥æ—¶å‡ºé”™ã€‚" << endl;
         return;
     }
 
@@ -192,22 +194,26 @@ void saveToFile(const Employee employees[], int count) {
     }
 
     outfile.close();
-    cout << "Êı¾İÒÑ³É¹¦±£´æµ½ÎÄ¼ş¡£" << endl;
+    cout << "æ•°æ®å·²æˆåŠŸä¿å­˜åˆ°æ–‡ä»¶ã€‚" << endl;
 }
 
 void readFromFile(Employee employees[], int& count) {
-    // ¶ÁÈ¡Ä£¿é
-    count = 0; // ÔÚÎÄ¼ş¶ÁÈ¡Ö®Ç°Çå³ıÏÖÓĞÊı¾İ
+    // è¯»å–æ¨¡å—
+    count = 0; // åœ¨æ–‡ä»¶è¯»å–ä¹‹å‰æ¸…é™¤ç°æœ‰æ•°æ®
 
-    ifstream infile("employee_data.csv");// ifstreamÄ¬ÈÏÒÔÊäÈë·½Ê½´ò¿ªÎÄ¼ş
+    system("cls");
+    
+    ifstream infile("employee_data.csv");// ifstreamé»˜è®¤ä»¥è¾“å…¥æ–¹å¼æ‰“å¼€æ–‡ä»¶
     if (!infile.is_open()) {
-        cout << "´ò¿ªÎÄ¼ş½øĞĞ¶ÁÈ¡Ê±³ö´í¡£" << endl;
+        cout << "æ‰“å¼€æ–‡ä»¶è¿›è¡Œè¯»å–æ—¶å‡ºé”™ã€‚" << endl;
         return;
     }
 
     string line;
     while (getline(infile, line)) {
         stringstream ss(line);
+        // stringstreamåŒ…å«äºstdä¸­ï¼Œå…è®¸å°†å­—ç¬¦ä¸²ä½œä¸ºæµè¿›è¡Œå¤„ç†
+        // å¯ä»¥ç†è§£ä¸ºå°†lineä¸­çš„å…ƒç´ æ‹†åˆ†ä¸ºæ•°ä¸ªEmployeeä¸­çš„å…ƒç´ ï¼Œæ‹†åˆ†åˆ¤æ–­ä¸ºâ€œ,â€
         Employee emp;
         char delimiter = ',';
 
@@ -215,6 +221,9 @@ void readFromFile(Employee employees[], int& count) {
         ss >> delimiter;
 
         getline(ss, emp.name, delimiter);
+        // ç”¨äºä»å­—ç¬¦ä¸² ss ä¸­è¯»å–ä¸€è¡Œæ•°æ®ï¼Œç›´åˆ°é‡åˆ°æŒ‡å®šçš„åˆ†éš”ç¬¦ delimiter æˆ–è€…åˆ°è¾¾æµçš„ç»“å°¾ã€‚
+        // ç”¨äºè¯»å–å¹¶å­˜å‚¨å‘˜å·¥çš„å§“åï¼Œç›´åˆ°é‡åˆ°é€—å·åˆ†éš”ç¬¦æˆ–è€…åˆ°è¾¾è¡Œå°¾ã€‚
+        
         getline(ss, emp.gender, delimiter);
         getline(ss, emp.education, delimiter);
         getline(ss, emp.position, delimiter);
@@ -226,5 +235,5 @@ void readFromFile(Employee employees[], int& count) {
     }
 
     infile.close();
-    cout << "ÒÑ³É¹¦´ÓÎÄ¼şÖĞ¶ÁÈ¡Êı¾İ¡£" << endl;
+    cout << "å·²æˆåŠŸä»æ–‡ä»¶ä¸­è¯»å–æ•°æ®ã€‚" << endl;
 }
