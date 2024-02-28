@@ -42,7 +42,7 @@ void displayMenu() {
 
 void addEmployee(Employee employees[], int& count) {
     // 添加模块
-    Employee emp;
+    Employee emp;// 欲添加员工
     cout << "\n请输入需添加员工的信息:" << endl;
     cout << "工号: ";
     cin >> emp.id;
@@ -73,6 +73,9 @@ void addEmployee(Employee employees[], int& count) {
     getline(cin, emp.notes);
 
     employees[count++] = emp;
+
+    system("cls");
+    
     cout << "员工信息添加成功！" << endl;
 }
 
@@ -100,6 +103,8 @@ void updateEmployee(Employee employees[], int count) {
             getline(cin, employees[i].phoneNumber);
             cout << "备注信息: ";
             getline(cin, employees[i].notes);
+
+            system("cls");
 
             cout << "员工信息更新成功！" << endl;
             return;
